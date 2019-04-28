@@ -10,10 +10,10 @@ const PORT = 5000;
 
 @Injectable()
 export class RestDataSource {
-    baseUrl: string;
+    //baseUrl: string;
 
-    constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-         this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
+    constructor(private http: HttpClient, @Inject('BASE_URL') private  baseUrl: string) {
+        //this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
         //this.baseUrl = baseUrl;//for https
     }
 
