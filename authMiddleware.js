@@ -9,7 +9,7 @@ module.exports = function (req, res, next) {
     if ((req.url == "/api/login" || req.url == "/login") && req.method == "POST") {
         if (req.body != null && req.body.name == USERNAME && req.body.password == PASSWORD) {
             let token = jwt.sign({ data: USERNAME, expiresIn: "1h" }, APP_SECRET);
-            res.json({ success: true, token: token });
+            res.json({ success: true, access_token: token });
         } else {
             res.json({ success: false });
         }
