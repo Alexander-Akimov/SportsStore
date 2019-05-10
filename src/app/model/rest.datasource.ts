@@ -13,30 +13,27 @@ const PORT = 5000;
 @Injectable()
 export class RestDataSource {
     //baseUrl: string;
-    auth_token: string;
-
+    public auth_token: string;
+    
     constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-        this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`; //to work with json-server
+        //this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`; //to work with json-server
         //this.baseUrl = baseUrl;//for https
     }
 
     getProducts(): Observable<Product[]> {
-        return this.http.get<Product[]>(this.baseUrl + "api/products");
+        return this.http.get<Product[]>(this.baseUrl + "api/products", this.getOptions());
     }
- 
+
     saveProduct(product: Product): Observable<Product> {
-        return this.http.post<Product>(this.baseUrl + "products",
-            product, this.getOptions());
+        return this.http.post<Product>(this.baseUrl + "products", product, this.getOptions());
     }
 
     updateProduct(product): Observable<Product> {
-        return this.http.put<Product>(`${this.baseUrl}products/${product.id}`,
-            product, this.getOptions());
+        return this.http.put<Product>(`${this.baseUrl}products/${product.id}`, product, this.getOptions());
     }
 
     deleteProduct(id: number): Observable<Product> {
-        return this.http.delete<Product>(`${this.baseUrl}products/${id}`,
-            this.getOptions());
+        return this.http.delete<Product>(`${this.baseUrl}products/${id}`, this.getOptions());
     }
 
     getOrders(): Observable<Order[]> {
@@ -48,20 +45,18 @@ export class RestDataSource {
     }
 
     deleteOrder(id: number): Observable<Order> {
-        return this.http.delete<Order>(`${this.baseUrl}orders/${id}`,
-            this.getOptions());
+        return this.http.delete<Order>(`${this.baseUrl}orders/${id}`, this.getOptions());
     }
 
     updateOrder(order: Order): Observable<Order> {
-        return this.http.put<Order>(`${this.baseUrl}orders/${order.id}`,
-            this.getOptions());
+        return this.http.put<Order>(`${this.baseUrl}orders/${order.id}`, this.getOptions());
     }
 
     authenticate(user: string, pass: string): Observable<boolean> {
-        return this.http.post<any>(this.baseUrl + "api/login", {
-            name: user, password: pass
+        return this.http.post<any>(this.baseUrl + "api/account/login", {
+            username: user, password: pass
         }).pipe(map(response => {
-            this.auth_token = response.success ? response.token : null;
+            this.auth_token = response.success ? response.access_token : null;
             return response.success;
         }));
     }
@@ -69,7 +64,7 @@ export class RestDataSource {
     private getOptions() {
         return {
             headers: new HttpHeaders({
-                "Authorization": `Bearer<${this.auth_token}>`
+                "Authorization": `Bearer ${this.auth_token}`
             })
         }
     }

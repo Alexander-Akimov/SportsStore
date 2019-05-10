@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component , OnInit} from "@angular/core";
 import { Router } from "@angular/router";
 
 import { Product } from "../model/product.model";
@@ -9,7 +9,7 @@ import { Cart } from '../model/cart.model';
     selector: "store",
     templateUrl: "store.component.html"
 })
-export class StoreComponent {
+export class StoreComponent implements OnInit {
     public selectedCategory = null;
     public productsPerPage = 4;
     public selectedPage = 1;
@@ -58,5 +58,9 @@ export class StoreComponent {
     addProductToCart(product: Product) {
         this.cart.addLine(product);
         this.router.navigateByUrl("/cart");
+    }
+
+    ngOnInit() { 
+        this.repository.loadData();
     }
 }

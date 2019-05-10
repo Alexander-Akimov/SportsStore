@@ -7,18 +7,25 @@ export class ProductRepository {
 
     private products: Product[] = [];
     private categories: string[] = [];
+    private errors = {};
 
     constructor(private dataSource: RestDataSource) {
-        this.dataSource.getProducts().subscribe(data => {
-            this.products = data;
-            this.categories = data
-                .map(p => p.category)
-                .filter((c, index, array) => array.indexOf(c) == index).sort();
-        });
+        // this.loadData();
+    }
+
+    loadData() {
+        this.dataSource.getProducts().subscribe(
+            data => {
+                this.products = data;
+                this.categories = data
+                    .map(p => p.category)
+                    .filter((c, index, array) => array.indexOf(c) == index).sort();
+            }, error => {
+                this.errors = error;
+            });
     }
 
     getProducts(category: string = null): Product[] {
-        // this.dataSource
         return this.products
             .filter(p => category == null || category == p.category);
     }
@@ -43,7 +50,7 @@ export class ProductRepository {
                 });
         }
     }
-    
+
     deleteProduct(id: number) {
         this.dataSource.deleteProduct(id).subscribe(p => {
             this.products.splice(this.products
