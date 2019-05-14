@@ -18,10 +18,11 @@ export class RestDataSource {
     constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
         //this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`; //to work with json-server
         //this.baseUrl = baseUrl;//for https
+       // console.log(this.baseUrl);
     }
 
     getProducts(): Observable<Product[]> {
-        return this.http.get<Product[]>(this.baseUrl + "api/products", this.getOptions());
+        return this.http.get<Product[]>(this.baseUrl + "api/products");
     }
 
     saveProduct(product: Product): Observable<Product> {

@@ -57,7 +57,7 @@ export class StoreComponent implements OnInit {
 
     addProductToCart(product: Product) {
         this.cart.addLine(product);
-        this.router.navigateByUrl("/cart");
+        this.router.navigateByUrl("/store/cart");
     }
 
     ngOnInit() { 

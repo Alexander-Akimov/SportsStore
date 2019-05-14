@@ -7,33 +7,25 @@ import { StoreModule } from './store/store.module';
 import { StoreComponent } from './store/store.component';
 import { CartDetailComponent } from './store/cartDetail.component';
 import { CheckoutComponent } from './store/checkout.component';
-import { StoreFirstGuard } from './storeFirst.guard';
+
 
 let routing = RouterModule.forRoot([
   {
-    path: "store", component: StoreComponent,
-    canActivate: [StoreFirstGuard]
-  },
-  {
-    path: "cart", component: CartDetailComponent,
-    canActivate: [StoreFirstGuard]
-  },
-  {
-    path: "checkout", component: CheckoutComponent,
-    canActivate: [StoreFirstGuard]
-  },
+    path: "store",
+    loadChildren: "./store/store.module#StoreModule"
+  },  
   {
     path: "admin",
     loadChildren: "./admin/admin.module#AdminModule",
-    canActivate: [StoreFirstGuard]
   },
-  { path: "**", redirectTo: "/store" }
+  { path: "**", redirectTo: "/store", pathMatch: 'full' },
+  { path: '', component: AppComponent }
 ]);
 
 @NgModule({
-  imports: [BrowserModule, StoreModule, routing],
+  imports: [BrowserModule, routing],
   declarations: [AppComponent],
-  providers: [StoreFirstGuard],
+ 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

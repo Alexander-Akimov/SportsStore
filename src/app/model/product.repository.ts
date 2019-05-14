@@ -14,6 +14,8 @@ export class ProductRepository {
     }
 
     loadData() {
+        this.products = [];
+        this.categories = [];
         this.dataSource.getProducts().subscribe(
             data => {
                 this.products = data;
