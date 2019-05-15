@@ -10,6 +10,6 @@ export class AdminComponent {
 
     logout() {
         this.auth.clear();
-        this.router.navigateByUrl("/admin/auth");
+        this.router.navigateByUrl("/");
     }
 }

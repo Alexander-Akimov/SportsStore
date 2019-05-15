@@ -1,4 +1,4 @@
-import { Component , OnInit} from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { Product } from "../model/product.model";
@@ -60,7 +60,7 @@ export class StoreComponent implements OnInit {
         this.router.navigateByUrl("/store/cart");
     }
 
-    ngOnInit() { 
+    ngOnInit() {
         this.repository.loadData();
     }
 }
