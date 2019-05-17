@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import RestDataSource from "./rest.datasource";
+import { RestDataSource } from "./rest.datasource";
 
 @Injectable()
 export class AuthService {
@@ -14,7 +14,7 @@ export class AuthService {
     get authenticated(): boolean {
         return this.datasource.auth_token != null;
     }
-    
+
     clear() {
         this.datasource.auth_token = null;
     }

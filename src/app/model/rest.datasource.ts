@@ -1,18 +1,17 @@
 import { Injectable, Inject } from "@angular/core";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpParams, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
-import Product from "./product.model";
-import { Order } from "./order.model";
 import { map } from "rxjs/operators";
-import { HttpHeaders } from '@angular/common/http';
-import { ProductsResp } from './productsResp.model';
+
+import { Order } from "./order.model";
+import Product from "./product.model";
 import Category from './category.model';
 
 const PROTOCOL = "http";
 const PORT = 5000;
 
 @Injectable()
-export default class RestDataSource {
+export class RestDataSource {
     //baseUrl: string;
     public auth_token: string;
 

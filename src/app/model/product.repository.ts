@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import Product from "./product.model";
-import RestDataSource from './rest.datasource';
+import { RestDataSource } from './rest.datasource';
 import Category from './category.model';
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+// import { Observable } from "rxjs";
+// import { map } from "rxjs/operators";
 
 @Injectable()
 export class ProductRepository {
