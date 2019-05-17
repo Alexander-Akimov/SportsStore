@@ -1,23 +1,42 @@
 <div class="bg-primary p-2 text-white" [class.bg-warning]="editing" [class.text-dark]="editing">
     <h5>{{editing ? "Edit" : "Create"}} Product</h5>
 </div>
+
 <form novalidate #form="ngForm" (ngSubmit)="save(form)">
     <div class="form-group">
         <label>Name</label>
-        <input class="form-control" name="name" [(ngModel)]="product.name" />
+        <input class="form-control" #name="ngModel" name="name" [(ngModel)]="product.name" required />
+        <span *ngIf="submitted && name.invalid " class="text-danger">
+            Please enter Product name
+        </span>
     </div>
+    
     <div class="form-group">
         <label>Category</label>
-        <input class="form-control" name="category" [(ngModel)]="product.category" />
+        <select class="form-control" #categoryId="ngModel" name="categoryId" [(ngModel)]="product.categoryId" required
+            (change)="changeCategory($event.target.value)" >
+            <option *ngFor="let category of categories" value={{category.id}}>
+                {{category.name}}
+            </option>
+        </select>
+        <span *ngIf="submitted && categoryId.invalid " class="text-danger">
+            Please select Product category
+        </span>
     </div>
     <div class="form-group">
         <label>Description</label>
-        <textarea class="form-control" name="description" [(ngModel)]="product.description">
+        <textarea class="form-control" #description="ngModel" name="description" [(ngModel)]="product.description" required>
         </textarea>
+        <span *ngIf="submitted && description.invalid " class="text-danger">
+            Please enter Product Description
+        </span>
     </div>
     <div class="form-group">
         <label>Price</label>
-        <input class="form-control" name="price" [(ngModel)]="product.price" />
+        <input class="form-control" #price="ngModel" name="price" [(ngModel)]="product.price" required />
+        <span *ngIf="submitted && price.invalid " class="text-danger">
+            Please enter Product Price
+        </span>
     </div>
     <button type="submit" class="btn btn-primary mr-1" [class.btn-warning]="editing">
         {{editing ? "Save" : "Create"}}

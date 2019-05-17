@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { Product } from "../model/product.model";
+import Product from "../model/product.model";
 import { ProductRepository } from "../model/product.repository";
 import { Cart } from '../model/cart.model';
+import Category from '../model/category.model';
 
 @Component({
     selector: "store",
@@ -24,7 +25,7 @@ export class StoreComponent implements OnInit {
             .slice(pageIndex, pageIndex + this.productsPerPage);
     }
 
-    get categories(): string[] {
+    get categories(): Category[] {
         return this.repository.getCategories();
     }
 

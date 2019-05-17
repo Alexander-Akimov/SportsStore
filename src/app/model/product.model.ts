@@ -1,8 +1,15 @@
-export class Product {
+import Category from './category.model';
+
+export default class Product {
+
     constructor(
-        public id?: number,
+        public id?: string,
         public name?: string,
-        public category?: string,
         public description?: string,
-        public price?: number) { }
+        public price?: number,
+        public categoryId?: string,
+        public category?: Category) {
+        // categoryId = category.id;
+        //console.log("constructor call: " + this);
+    }
 }

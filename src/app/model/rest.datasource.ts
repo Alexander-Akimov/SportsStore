@@ -1,39 +1,41 @@
 import { Injectable, Inject } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Product } from "./product.model";
-import { Cart } from "./cart.model";
+import Product from "./product.model";
 import { Order } from "./order.model";
 import { map } from "rxjs/operators";
 import { HttpHeaders } from '@angular/common/http';
+import { ProductsResp } from './productsResp.model';
+import Category from './category.model';
 
 const PROTOCOL = "http";
 const PORT = 5000;
 
 @Injectable()
-export class RestDataSource {
+export default class RestDataSource {
     //baseUrl: string;
     public auth_token: string;
-    
+
     constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
         //this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`; //to work with json-server
         //this.baseUrl = baseUrl;//for https
-       // console.log(this.baseUrl);
+        // console.log(this.baseUrl);
     }
 
     getProducts(): Observable<Product[]> {
         return this.http.get<Product[]>(this.baseUrl + "api/products");
     }
 
+
     saveProduct(product: Product): Observable<Product> {
         return this.http.post<Product>(this.baseUrl + "api/products", product, this.getOptions());
     }
 
-    updateProduct(product): Observable<Product> {
+    updateProduct(product: Product): Observable<Product> {
         return this.http.put<Product>(`${this.baseUrl}api/products/${product.id}`, product, this.getOptions());
     }
 
-    deleteProduct(id: number): Observable<Product> {
+    deleteProduct(id: string): Observable<Product> {
         return this.http.delete<Product>(`${this.baseUrl}api/products/${id}`, this.getOptions());
     }
 
@@ -50,7 +52,23 @@ export class RestDataSource {
     }
 
     updateOrder(order: Order): Observable<Order> {
-        return this.http.put<Order>(`${this.baseUrl}api/orders/${order.id}`, this.getOptions());
+        return this.http.put<Order>(`${this.baseUrl}api/orders/${order.id}`, order, this.getOptions());
+    }
+
+    getCategories(): Observable<Category[]> {
+        return this.http.get<Category[]>(this.baseUrl + "api/categories");
+    }
+
+    saveCategory(category: Category): Observable<Category> {
+        return this.http.post<Category>(this.baseUrl + "api/categories", category, this.getOptions());
+    }
+
+    updateCategory(category: Category): Observable<Category> {
+        return this.http.put<Category>(`${this.baseUrl}api/categories/${category.id}`, category, this.getOptions());
+    }
+
+    deleteCategory(id: string): Observable<Category> {
+        return this.http.delete<Category>(`${this.baseUrl}api/categories/${id}`, this.getOptions());
     }
 
     authenticate(user: string, pass: string): Observable<boolean> {
@@ -64,6 +82,7 @@ export class RestDataSource {
 
     private getOptions() {
         return {
+            params: {},
             headers: new HttpHeaders({
                 "Authorization": `Bearer ${this.auth_token}`
             })

@@ -1,7 +1,7 @@
 <table class="table table-sm table-striped">
     <thead>
         <tr>
-            <th>ID</th>
+            <!-- <th>ID</th> -->
             <th>Name</th>
             <th>Category</th>
             <th>Price</th>
@@ -9,10 +9,10 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let p of getProducts()">
-            <td>{{p.id}}</td>
+        <tr *ngFor="let p of products">
+            <!-- <td>{{p.id}}</td> -->
             <td>{{p.name}}</td>
-            <td>{{p.category}}</td>
+            <td>{{p.category.name}}</td>
             <td>{{p.price | currency:"USD":"symbol":"2.2-2"}}</td>
             <td>
                 <button class="btn btn-sm btn-warning mr-1" [routerLink]="['/admin/main/products/edit', p.id]">

@@ -1,3 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.min.css"; 
 @import "~font-awesome/css/font-awesome.min.css"; 
+
+input.ng-dirty.ng-invalid, textarea.ng-dirty.ng-invalid,  select.ng-dirty.ng-invalid { border: 2px solid #ff0000 }
+input.ng-dirty.ng-valid, textarea.ng-dirty.ng-valid,  select.ng-dirty.ng-valid { border: 2px solid #6bc502 }

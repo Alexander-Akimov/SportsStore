@@ -22,8 +22,8 @@
                 Home
             </button>
             <button *ngFor="let cat of categories" class="btn btn-outline-primary btn-block"
-                [class.active]="cat == selectedCategory" (click)="changeCategory(cat)">
-                {{cat}}
+                [class.active]="cat.name == selectedCategory" (click)="changeCategory(cat.name)">
+                {{cat.name}}
             </button>
             <button class="btn btn-block btn-danger mt-3" routerLink="/admin">
                 Admin

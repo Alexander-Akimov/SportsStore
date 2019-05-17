@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Product } from './product.model';
+import Product from './product.model';
 
 @Injectable()
 export class Cart {
@@ -25,7 +25,7 @@ export class Cart {
         this.recalculate();
     }
 
-    removeLine(id: number) {
+    removeLine(id: string) {
         let index = this.lines.findIndex(line => line.product.id == id);
         this.lines.splice(index, 1);
         this.recalculate();
@@ -36,7 +36,7 @@ export class Cart {
         this.itemCount = 0;
         this.cartPrice = 0;
     }
-    
+
     private recalculate() {
         this.itemCount = 0;
         this.cartPrice = 0;
