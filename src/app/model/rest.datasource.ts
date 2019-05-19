@@ -26,7 +26,7 @@ export class RestDataSource {
     }
 
     getCategories(): Observable<Category[]> {
-        return this.http.get<Category[]>(this.baseUrl + "api/cats"); //api/categories doesn't work with dot net
+        return this.http.get<Category[]>(this.baseUrl + "api/categories");
     }
 
     saveProduct(product: Product): Observable<Product> {
@@ -60,15 +60,15 @@ export class RestDataSource {
    
 
     saveCategory(category: Category): Observable<Category> {
-        return this.http.post<Category>(this.baseUrl + "api/cats", category, this.getOptions());
+        return this.http.post<Category>(this.baseUrl + "api/categories", category, this.getOptions());
     }
 
     updateCategory(category: Category): Observable<Category> {
-        return this.http.put<Category>(`${this.baseUrl}api/cats/${category.id}`, category, this.getOptions());
+        return this.http.put<Category>(`${this.baseUrl}api/categories/${category.id}`, category, this.getOptions());
     }
 
     deleteCategory(id: string): Observable<Category> {
-        return this.http.delete<Category>(`${this.baseUrl}api/cats/${id}`, this.getOptions());
+        return this.http.delete<Category>(`${this.baseUrl}api/categories/${id}`, this.getOptions());
     }
 
     authenticate(user: string, pass: string): Observable<boolean> {

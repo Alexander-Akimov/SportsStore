@@ -9,12 +9,12 @@ export class CategoryTableComponent implements OnInit {
 
     constructor(private repository: ProductRepository) { }
 
-    deleteCategory(id: string) {
-        this.repository.deleteCategory(id);
-    }
-    
     get categories(): Category[] {
         return this.repository.getCategories();
+    }
+
+    deleteCategory(id: string) {
+        this.repository.deleteCategory(id);
     }
 
     ngOnInit(): void {
