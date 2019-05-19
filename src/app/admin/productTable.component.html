@@ -12,7 +12,7 @@
         <tr *ngFor="let p of products">
             <!-- <td>{{p.id}}</td> -->
             <td>{{p.name}}</td>
-            <td>{{p.category.name}}</td>
+            <td>{{p.categoryName}}</td>
             <td>{{p.price | currency:"USD":"symbol":"2.2-2"}}</td>
             <td>
                 <button class="btn btn-sm btn-warning mr-1" [routerLink]="['/admin/main/products/edit', p.id]">

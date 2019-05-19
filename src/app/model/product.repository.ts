@@ -16,17 +16,12 @@ export class ProductRepository {
         // this.loadData();
     }
 
-    private setCategory(prod: Product): Product {
-        prod.categoryId = prod.category.id;
-        return prod;
-    }
-
     loadData() {
         // this.products = [];
         // this.categories = [];
         this.dataSource.getProducts()//.pipe(map(p => p))
             .subscribe(products => {
-                this.products = products.map(this.setCategory);
+                this.products = products;
             }, error => {
                 this.errors = error;
             });
@@ -40,9 +35,9 @@ export class ProductRepository {
             });
     }
 
-    getProducts(category: string = null): Product[] {
+    getProducts(categoryId: string = null): Product[] {
         return this.products
-            .filter(p => category == null || category == p.category);
+            .filter(p => categoryId == null || categoryId == p.categoryId);
     }
 
     getProduct(id: string): Product {

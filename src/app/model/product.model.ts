@@ -8,7 +8,7 @@ export default class Product {
         public description?: string,
         public price?: number,
         public categoryId?: string,
-        public category?: Category) {
+        public categoryName?: string) {
         // categoryId = category.id;
         //console.log("constructor call: " + this);
     }
