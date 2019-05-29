@@ -3,27 +3,25 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from "@angular/router";
 
 import { AppComponent } from './app.component';
-import { StoreModule } from './store/store.module';
-import { StoreComponent } from './store/store.component';
-import { CartDetailComponent } from './store/cartDetail.component';
-import { CheckoutComponent } from './store/checkout.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 let routing = RouterModule.forRoot([
   {
     path: "store",
-    loadChildren: "./store/store.module#StoreModule"
+    loadChildren: () => import('./store/store.module').then(m => m.StoreModule)
   },  
   {
     path: "admin",
-    loadChildren: "./admin/admin.module#AdminModule",
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   },
   { path: "**", redirectTo: "/store", pathMatch: 'full' },
   { path: '', component: AppComponent }
 ]);
 
 @NgModule({
-  imports: [BrowserModule, routing],
+  imports: [BrowserModule, routing, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   declarations: [AppComponent],
  
   bootstrap: [AppComponent]
