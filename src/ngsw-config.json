@@ -30,7 +30,8 @@
     {
       "name": "api-product",
       "urls": [
-        "/api/products"
+        "/api/products",
+        "/api/categories"
       ],
       "cacheConfig": {
         "maxSize": 100,

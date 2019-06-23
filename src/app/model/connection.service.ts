@@ -10,7 +10,7 @@ export class ConnectionService {
 
         window.addEventListener("online",
             (e) => this.handleConnectionChange(e));
-            
+
         window.addEventListener("offline",
             (e) => this.handleConnectionChange(e));
     }
